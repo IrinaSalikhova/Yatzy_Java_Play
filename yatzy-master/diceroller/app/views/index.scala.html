@@ -1,0 +1,33 @@
+<!-- $ is JQuery-->
+
+@()
+
+@main("Welcome to Play") {
+  <h1>Welcome to Play!</h1>
+  <form action="">
+    <h3>Enter the number of rolls</h3>
+    <label for="name">Input rolls:</label>
+  <input type="text" id="name" name="name"><br><br> </input>
+  <input id="submit" type="submit" value="Submit"> </input>
+  <p id="para"></p>
+  </form>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+  $(document).ready(function(){
+  $("#para").show();
+  $("#submit").click(function(e){
+    e.preventDefault();
+	$.ajax({
+        url: "http://localhost:9000/roll/" + $('#name').val(),
+        type: 'GET',
+        dataType: 'json', 
+        success: function(res) {
+			$("#para").append("<br>The values for the corresponding rolls are:</br>" + res);
+			$("#para").show();
+        }
+    });		
+  })
+})
+  </script>
+}
